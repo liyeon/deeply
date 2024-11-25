@@ -1,3 +1,92 @@
 @import './reset.css';
 @import './common.css';
+@import './responsive.css';
 
+
+/*footer*/
+/* #footer{} */
+
+#footer .group-sound {
+  padding: 47px 40px;
+  position: relative;
+}
+
+#footer .group-sound .bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+#footer .group-sound .bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#footer .group-sound h3 {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.72px;
+  color: rgb(246, 246, 247);
+  line-height: 120%;
+  text-align: center;
+}
+
+
+#footer .group-info{
+  background-color: rgb(22, 22, 23);
+  padding: 40px 0 40px 20px;
+  font-size: 14px;
+  line-height: 150%;
+  color: #fff;
+  font-weight: 600;
+}
+#footer .group-info .gray{
+  color: rgb(142, 143, 157);
+  font-weight: 500;
+}
+#footer .group-info .addr-area{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+#footer .group-info .addr-area .info-list{
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 12px;
+  column-gap: 8px;
+}
+#footer .group-info .addr-area .info-item__addr,
+#footer .group-info .addr-area .info-item__business{
+  flex: 100%;
+}
+#footer .group-info .addr-area .copy{
+  font-size: 12px;
+}
+#footer .group-info .terms-list{
+  display: flex;
+  gap: 24px;
+}
+@media (min-width: 992px) {
+  .lg-hidden {
+    display: none;
+  }
+
+  #footer .group-sound {
+    padding: clamp(47px, 8.125vw, 156px) 40px;
+  }
+
+  #footer .group-sound h3 {
+    font-size: clamp(36px, 4.167vw, 80px);
+    font-weight: 700;
+    line-height: 160%;
+    letter-spacing: -1.6px;
+  }
+  #footer .group-info .addr-area .info-item__business{
+    flex: 1;
+  }
+}
