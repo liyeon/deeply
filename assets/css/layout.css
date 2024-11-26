@@ -1,6 +1,5 @@
 @import './reset.css';
 @import './common.css';
-@import './responsive.css';
 
 /* header */
 #header{
@@ -9,6 +8,7 @@
   left: 0;
   width: 100%;
   z-index: 100;
+  display: none;
 }
 /*footer*/
 #footer{
