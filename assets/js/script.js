@@ -48,7 +48,6 @@ window.addEventListener('scroll', () => {
 
 
 const lottieLogoElement = document.querySelector("#lottie");
-const animationPath = lottieLogoElement.dataset.path; // Lottie 애니메이션 JSON 경로
 
 // Lottie 로드
 const lottieAnimation = lottie.loadAnimation({
@@ -56,7 +55,7 @@ const lottieAnimation = lottie.loadAnimation({
   renderer: "svg", 
   loop: true,
   autoplay: true,
-  path: animationPath, // JSON 파일 경로
+  path: "./assets/json/lottie.json", // JSON 파일 경로
 });
 
 const caseSwiper = new Swiper(".group-case .swiper-wrap", {
