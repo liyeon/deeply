@@ -1,17 +1,19 @@
 
 
+const body = document.querySelector('body');
 const btnMenu = document.querySelector('.btn-menu');
 const gnbMenu = document.querySelector('.gnb');
 const btnLang = document.querySelector('.btn-lang');
 const langList = document.querySelector('.lang-list');
-const gnbItem = document.querySelector('.gnb-item.arrow');
-const subList = document.querySelector('.sub-list');
+const gnbItems = document.querySelectorAll('.gnb-item.arrow');
 
 btnMenu.addEventListener('click', function() {
   if (btnMenu.classList.contains('active')) {
+    body.classList.remove('hidden');
     btnMenu.classList.remove('active');
     gnbMenu.classList.remove('active');
   } else {
+    body.classList.add('hidden');
     btnMenu.classList.add('active');
     gnbMenu.classList.add('active');
   }
@@ -27,16 +29,24 @@ btnLang.addEventListener('click', function() {
   }
 });
 
+let lastScroll = 0;
 
-gnbItem.addEventListener('click', function() {
-  if (gnbItem.classList.contains('active')) {
-    gnbItem.classList.remove('active');
-    subList.classList.remove('active');
+window.addEventListener('scroll', () => {
+  const curr = window.scrollY;
+  if (curr > 100) {
+    header.classList.add('active');
   } else {
-    gnbItem.classList.add('active');
-    subList.classList.add('active');
+    header.classList.remove('active');
   }
+  if (curr > lastScroll) {
+    header.classList.add('hide');
+  } else {
+    header.classList.remove('hide');
+  }
+  lastScroll = curr;
 });
+
+
 const lottieLogoElement = document.querySelector("#lottie");
 const animationPath = lottieLogoElement.dataset.path; // Lottie 애니메이션 JSON 경로
 
@@ -145,7 +155,49 @@ function createScrollTrigger(triggerClass) {
 [".group-real", ".group-case", ".sc-company"].forEach(createScrollTrigger);
 
 let mm = gsap.matchMedia();
+
+gnbItems.forEach(gnbItem => {
+  gnbItem.removeEventListener('mouseover',()=>{})
+  gnbItem.removeEventListener('mouseover',()=>{})
+
+  gnbItem.addEventListener('click', function() {
+    const subList = gnbItem.querySelector('.sub-list');
+
+    gnbItems.forEach(item => {
+      if (item !== gnbItem) {
+        const otherSubList = item.querySelector('.sub-list');
+        if (otherSubList.classList.contains('active')) {
+          otherSubList.classList.remove('active');
+        }
+        item.classList.remove('active');
+      }
+    });
+
+    if (subList.classList.contains('active')) {
+      subList.classList.remove('active');
+      gnbItem.classList.remove('active');
+    } else {
+      subList.classList.add('active');
+      gnbItem.classList.add('active');
+    }
+  });
+});
+
 mm.add("(min-width: 992px", () => {
+  body.classList.remove('hidden');
+  gnbItems.forEach(gnbItem => {
+    gnbItem.removeEventListener('click',()=>{})
+    const subList = gnbItem.querySelector('.sub-list');
+    gnbItem.addEventListener('mouseover', function () {
+      subList.classList.add('active');
+      gnbItem.classList.add('active');
+    });
+
+    gnbItem.addEventListener('mouseleave', function () {
+      subList.classList.remove('active');
+      gnbItem.classList.remove('active');
+    });
+  });
   const solution = gsap.timeline({
     scrollTrigger: {
       trigger: ".sc-listen .group-solution",
