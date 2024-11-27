@@ -1,3 +1,42 @@
+
+
+const btnMenu = document.querySelector('.btn-menu');
+const gnbMenu = document.querySelector('.gnb');
+const btnLang = document.querySelector('.btn-lang');
+const langList = document.querySelector('.lang-list');
+const gnbItem = document.querySelector('.gnb-item.arrow');
+const subList = document.querySelector('.sub-list');
+
+btnMenu.addEventListener('click', function() {
+  if (btnMenu.classList.contains('active')) {
+    btnMenu.classList.remove('active');
+    gnbMenu.classList.remove('active');
+  } else {
+    btnMenu.classList.add('active');
+    gnbMenu.classList.add('active');
+  }
+});
+
+btnLang.addEventListener('click', function() {
+  if (btnLang.classList.contains('active')) {
+    btnLang.classList.remove('active');
+    langList.classList.remove('active');
+  } else {
+    btnLang.classList.add('active');
+    langList.classList.add('active');
+  }
+});
+
+
+gnbItem.addEventListener('click', function() {
+  if (gnbItem.classList.contains('active')) {
+    gnbItem.classList.remove('active');
+    subList.classList.remove('active');
+  } else {
+    gnbItem.classList.add('active');
+    subList.classList.add('active');
+  }
+});
 const lottieLogoElement = document.querySelector("#lottie");
 const animationPath = lottieLogoElement.dataset.path; // Lottie 애니메이션 JSON 경로
 
