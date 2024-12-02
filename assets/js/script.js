@@ -47,18 +47,18 @@ window.addEventListener('scroll', () => {
 });
 
 
-const lottieLogoElement = document.querySelector("#lottie");
+const lottieLogoElement = document.querySelector('#lottie');
 
 // Lottie 로드
 const lottieAnimation = lottie.loadAnimation({
   container: lottieLogoElement, 
-  renderer: "svg", 
+  renderer: 'svg', 
   loop: true,
   autoplay: true,
-  path: "./assets/json/lottie.json", // JSON 파일 경로
+  path: './assets/json/lottie.json', // JSON 파일 경로
 });
 
-const caseSwiper = new Swiper(".group-case .swiper-wrap", {
+const caseSwiper = new Swiper('.group-case .swiper-wrap', {
   slidesPerView: 1.1,
   spaceBetween: 16,
   grabCursor: true, // 드래그 커서
@@ -70,67 +70,67 @@ const caseSwiper = new Swiper(".group-case .swiper-wrap", {
     990: {
       slidesPerView: 3.5,
       navigation: {
-        nextEl: ".group-case .btn-box .btn.next",
-        prevEl: ".group-case .btn-box .btn.prev",
+        nextEl: '.group-case .btn-box .btn.next',
+        prevEl: '.group-case .btn-box .btn.prev',
       },
     },
   },
 });
 
-gsap.set(".sc-intro .group-sound h2,.sc-intro .group-sound p", {
-  filter: "blur(28px)",
+gsap.set('.sc-intro .group-sound h2,.sc-intro .group-sound p', {
+  filter: 'blur(28px)',
   opacity: 0,
   y: 200,
 });
-gsap.to(".sc-intro .group-sound h2,.sc-intro .group-sound p", {
-  filter: "blur(0)",
+gsap.to('.sc-intro .group-sound h2,.sc-intro .group-sound p', {
+  filter: 'blur(0)',
   opacity: 1,
   y: 0,
 });
 
 const intro = gsap.timeline({
   scrollTrigger: {
-    trigger: ".sc-intro .group-noise",
-    start: "top top",
-    end: "bottom bottom",
+    trigger: '.sc-intro .group-noise',
+    start: 'top top',
+    end: 'bottom bottom',
     scrub: 0,
   },
 });
 intro.fromTo(
-  ".sc-intro .group-noise .headline span",
+  '.sc-intro .group-noise .headline span',
   {
     autoAlpha: 0,
-    filter: "blur(4.5px)",
+    filter: 'blur(4.5px)',
     stagger: 1,
   },
   {
     autoAlpha: 1,
-    filter: "blur(0)",
+    filter: 'blur(0)',
     stagger: 1,
   }
 );
 
 ScrollTrigger.create({
-  trigger: ".sc-listen",
-  start: "top 30%",
-  end: "bottom bottom",
+  trigger: '.sc-listen',
+  start: 'top 30%',
+  end: 'bottom bottom',
   markers: false,
   onEnter: function () {
-    gsap.to(".sc-listen .group-typo h2", {
+    gsap.to('.sc-listen .group-typo h2', {
       rotate: 0,
       scale: 1,
       opacity: 1,
-      transform: "perspective(854.701px)",
+      transform: 'perspective(854.701px)',
       perspective: 600,
       duration: 1,
     });
-    gsap.to(".sc-listen .group-typo p", {
+    gsap.to('.sc-listen .group-typo p', {
       opacity: 1,
     });
   },
 });
 
-gsap.set(".target", {
+gsap.set('.target', {
   opacity: 0,
   y: 30,
 });
@@ -138,8 +138,8 @@ gsap.set(".target", {
 function createScrollTrigger(triggerClass) {
   ScrollTrigger.create({
     trigger: triggerClass,
-    start: "top 30%",
-    end: "bottom bottom",
+    start: 'top 30%',
+    end: 'bottom bottom',
     markers: false,
     onEnter: function () {
       gsap.to(`${triggerClass} .target`, {
@@ -151,60 +151,56 @@ function createScrollTrigger(triggerClass) {
   });
 }
 
-[".group-real", ".group-case", ".sc-company"].forEach(createScrollTrigger);
+['.group-real', '.group-case', '.sc-company'].forEach(createScrollTrigger);
 
 let mm = gsap.matchMedia();
+gnbItems.forEach(gnbItem => {
+  gnbItem.addEventListener('click', function() {
+    const subList = gnbItem.querySelector('.sub-list');
 
-mm.add("(max-width: 992px", () => {
-  gnbItems.forEach(gnbItem => {
-    gnbItem.addEventListener('click', function() {
-      const subList = gnbItem.querySelector('.sub-list');
-  
-      gnbItems.forEach(item => {
-        if (item !== gnbItem) {
-          const otherSubList = item.querySelector('.sub-list');
-          if (otherSubList.classList.contains('active')) {
-            otherSubList.classList.remove('active');
-          }
-          item.classList.remove('active');
+    gnbItems.forEach(item => {
+      if (item !== gnbItem) {
+        const otherSubList = item.querySelector('.sub-list');
+        if (otherSubList.classList.contains('active')) {
+          otherSubList.classList.remove('active');
         }
-      });
-  
-      if (subList.classList.contains('active')) {
-        subList.classList.remove('active');
-        gnbItem.classList.remove('active');
-      } else {
-        subList.classList.add('active');
-        gnbItem.classList.add('active');
+        item.classList.remove('active');
       }
     });
+
+    if (subList.classList.contains('active')) {
+      subList.classList.remove('active');
+      gnbItem.classList.remove('active');
+    } else {
+      subList.classList.add('active');
+      gnbItem.classList.add('active');
+    }
   });
 });
 
-
-mm.add("(min-width: 992px", () => {
+mm.add('(min-width: 992px', () => {
   body.classList.remove('hidden');
   const solution = gsap.timeline({
     scrollTrigger: {
-      trigger: ".sc-listen .group-solution",
-      start: "top top",
-      end: "bottom bottom",
+      trigger: '.sc-listen .group-solution',
+      start: 'top top',
+      end: 'bottom bottom',
       scrub: 0,
     },
   });
   gsap.set(
-    ".sc-listen .group-solution .solution-item2,.sc-listen .group-solution .solution-item3",
+    '.sc-listen .group-solution .solution-item2,.sc-listen .group-solution .solution-item3',
     { yPercent: 200 }
   );
   solution
-    .to(".sc-listen .group-solution .solution-item1", {
+    .to('.sc-listen .group-solution .solution-item1', {
       scale: 0.9,
-      filter: "blur(4.5px)",
+      filter: 'blur(4.5px)',
     })
-    .to(".sc-listen .group-solution .solution-item2", { yPercent: 0 }, "<")
-    .to(".sc-listen .group-solution .solution-item2", {
+    .to('.sc-listen .group-solution .solution-item2', { yPercent: 0 }, '<')
+    .to('.sc-listen .group-solution .solution-item2', {
       scale: 0.9,
-      filter: "blur(4.5px)",
+      filter: 'blur(4.5px)',
     })
-    .to(".sc-listen .group-solution .solution-item3", { yPercent: 0 }, "<");
+    .to('.sc-listen .group-solution .solution-item3', { yPercent: 0 }, '<');
 });
