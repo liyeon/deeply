@@ -155,48 +155,35 @@ function createScrollTrigger(triggerClass) {
 
 let mm = gsap.matchMedia();
 
-gnbItems.forEach(gnbItem => {
-  gnbItem.removeEventListener('mouseover',()=>{})
-  gnbItem.removeEventListener('mouseover',()=>{})
-
-  gnbItem.addEventListener('click', function() {
-    const subList = gnbItem.querySelector('.sub-list');
-
-    gnbItems.forEach(item => {
-      if (item !== gnbItem) {
-        const otherSubList = item.querySelector('.sub-list');
-        if (otherSubList.classList.contains('active')) {
-          otherSubList.classList.remove('active');
+mm.add("(max-width: 992px", () => {
+  gnbItems.forEach(gnbItem => {
+    gnbItem.addEventListener('click', function() {
+      const subList = gnbItem.querySelector('.sub-list');
+  
+      gnbItems.forEach(item => {
+        if (item !== gnbItem) {
+          const otherSubList = item.querySelector('.sub-list');
+          if (otherSubList.classList.contains('active')) {
+            otherSubList.classList.remove('active');
+          }
+          item.classList.remove('active');
         }
-        item.classList.remove('active');
+      });
+  
+      if (subList.classList.contains('active')) {
+        subList.classList.remove('active');
+        gnbItem.classList.remove('active');
+      } else {
+        subList.classList.add('active');
+        gnbItem.classList.add('active');
       }
     });
-
-    if (subList.classList.contains('active')) {
-      subList.classList.remove('active');
-      gnbItem.classList.remove('active');
-    } else {
-      subList.classList.add('active');
-      gnbItem.classList.add('active');
-    }
   });
 });
 
+
 mm.add("(min-width: 992px", () => {
   body.classList.remove('hidden');
-  gnbItems.forEach(gnbItem => {
-    gnbItem.removeEventListener('click',()=>{})
-    const subList = gnbItem.querySelector('.sub-list');
-    gnbItem.addEventListener('mouseover', function () {
-      subList.classList.add('active');
-      gnbItem.classList.add('active');
-    });
-
-    gnbItem.addEventListener('mouseleave', function () {
-      subList.classList.remove('active');
-      gnbItem.classList.remove('active');
-    });
-  });
   const solution = gsap.timeline({
     scrollTrigger: {
       trigger: ".sc-listen .group-solution",
