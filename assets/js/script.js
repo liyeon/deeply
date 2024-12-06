@@ -154,27 +154,29 @@ function createScrollTrigger(triggerClass) {
 ['.group-real', '.group-case', '.sc-company'].forEach(createScrollTrigger);
 
 let mm = gsap.matchMedia();
-gnbItems.forEach(gnbItem => {
-  gnbItem.addEventListener('click', function() {
-    const subList = gnbItem.querySelector('.sub-list');
-
-    gnbItems.forEach(item => {
-      if (item !== gnbItem) {
-        const otherSubList = item.querySelector('.sub-list');
-        if (otherSubList.classList.contains('active')) {
-          otherSubList.classList.remove('active');
+mm.add('(max-width: 991px', () => {
+  gnbItems.forEach(gnbItem => {
+    gnbItem.addEventListener('click', function() {
+      const subList = gnbItem.querySelector('.sub-list');
+  
+      gnbItems.forEach(item => {
+        if (item !== gnbItem) {
+          const otherSubList = item.querySelector('.sub-list');
+          if (otherSubList.classList.contains('active')) {
+            otherSubList.classList.remove('active');
+          }
+          item.classList.remove('active');
         }
-        item.classList.remove('active');
+      });
+  
+      if (subList.classList.contains('active')) {
+        subList.classList.remove('active');
+        gnbItem.classList.remove('active');
+      } else {
+        subList.classList.add('active');
+        gnbItem.classList.add('active');
       }
     });
-
-    if (subList.classList.contains('active')) {
-      subList.classList.remove('active');
-      gnbItem.classList.remove('active');
-    } else {
-      subList.classList.add('active');
-      gnbItem.classList.add('active');
-    }
   });
 });
 
